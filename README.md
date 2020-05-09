@@ -1,0 +1,1 @@
+#FLask based project which scans brain MRI and predicts whether it is normal or abnormal scan

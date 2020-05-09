@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>BrainX</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='animate.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='media-queries.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark fixed-top navbar-expand-md navbar-no-bg">
+        <div class="container">
+            <i><b><a class="navbar-brand" href="/">BrainX</a></b></i>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link scroll-link" href="#top-content">Predict</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link scroll-link" href="#about-us">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="top-content">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <img id="userimage" src="../static/placeholder-300x202.jpg" height="250px" width="300px">
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <form id="upload-data">
+                                <div class="form-row mt-2">
+                                    <div class="col">
+                                        <div class="btn-group w-25" role="group">
+                                            <button type="button" class="form-control btn btn-primary"
+                                                id="uload">Upload</button>
+                                            <button id="send" type="button"
+                                                class="form-control btn btn-success">Predict</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-none">
+                                    <input name="upload" id="fileinput" type="file" class="custom-file-input">
+                                </div>
+                                <input type="hidden" class="form-control mr-2" id="url"
+                                    placeholder="Enter REST Api url..." value="../predict" />
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <p id="resultText" class="text p-5"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="about-us-container section-container section-container-gray-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-7 about-us-box wow fadeInLeft">
+                    <div class="about-us-box-text">
+                        <h3>About Program</h3>
+                        <p class="medium-paragraph">
+		            A brain tumor is a collection, or mass, of abnormal cells in your brain. Your skull, which encloses your brain, is very rigid. Any growth inside such a restricted space can cause problems. Brain tumors can be cancerous (malignant) or noncancerous (benign). When benign or malignant tumors grow, they can cause the pressure inside your skull to increase. This can cause brain damage, and it can be life-threatening.
+                            
+                            
+                        </p>
+                        <p>
+                            This tool is developed in order to predict whether a patient is having brain tumor or not.
+                            
+                            
+                            The focus of this project is to help the doctors save precious lives of patients in remote areas of our country as well as worldwide, because there can be a possibility that radiologist is not available in the area so using tool doctor can get information about the patients whether he/she is having tumor or not using their MRI Scans.
+                        </p>
+                        <p>
+                            Our tool is able to make predictions with an accuracy of 90 %. 
+                            
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='jquery-migrate-3.0.0.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='jquery.backstretch.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='wow.js') }}"></script>
+    <script src="{{ url_for('static', filename='retina-1.1.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <script>
+        var base_data = "";
+
+        function sendRequest(base64Data) {
+            var type = "json";
+            if (base64Data != "" || base64Data != null) {
+                if (type == "imgtobase") {
+                    $(".res-part").html("");
+                    $(".res-part").html(base64Data);
+                }
+                else if (type == "basetoimg") {
+                    var imageData = $("#imgstring").val();
+                    $(".res-part").html("");
+                    $(".res-part").append("<img src='data:image/jpeg;base64," + imageData + "' alt='' />");
+                }
+                else {
+                    var url = $("#url").val();
+                    $('#resultImage').attr('src', "../static/loading.png")
+                    $.ajax({
+                        url: url,
+                        type: "post",
+                        cache: false,
+                        async: true,
+                        crossDomain: true,
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Access-Control-Allow-Origin': '*'
+                        },
+                        data: JSON.stringify({ image: base64Data }),
+                        success: function (res) {
+                            $("#resultText").text("Prediction: " + JSON.stringify(res[0], undefined, 2));
+                        }
+                    });
+                }
+            }
+        }
+
+        $(document).ready(function () {
+
+            $('#send').click(function (evt) {
+                sendRequest(base_data);
+            });
+
+            $('#uload').click(function (evt) {
+                $('#fileinput').focus().trigger('click');
+                $("#resultText").text("");
+            });
+
+            $("#fileinput").change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var url = e.target.result;
+                        var img = new Image();
+                        img.crossOrigin = 'Anonymous';
+                        img.onload = function () {
+                            var canvas = document.createElement('CANVAS');
+                            var ctx = canvas.getContext('2d');
+                            canvas.height = this.height;
+                            canvas.width = this.width;
+                            ctx.drawImage(this, 0, 0);
+                            base_data = canvas.toDataURL('image/jpeg', 1.0).replace(/^data:image.+;base64,/, '');
+                            canvas = null;
+                        };
+                        img.src = url;
+                        $('#userimage').attr('src', url);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
